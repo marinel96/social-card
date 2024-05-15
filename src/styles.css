@@ -1,0 +1,136 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+main {
+  margin: auto;
+}
+
+#core-concepts {
+  background-color: #0d82d0;
+}
+
+main h2 {
+  text-align: center;
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 0 0 1.5rem 0;
+  color: #ab98c0;
+}
+
+#core-concepts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#core-concepts li {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-align: center;
+}
+
+#core-concepts li img {
+  height: 7rem;
+  width: 7rem;
+  object-fit: cover;
+}
+
+#core-concepts li h3 {
+  margin: 0.5rem 0;
+  color: white;
+}
+
+#core-concepts li p {
+  font-size: 0.9rem;
+  color: white;
+}
+.info {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+/* Post Card Styles */
+.post-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.post-card:hover {
+  transform: scale(1.03);
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-content {
+  padding: 15px;
+}
+
+.post-content h3 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.post-content p {
+  color: #fff;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.username {
+  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 20px;
+  color: rgba(255, 255, 255, 0.492);
+  border-bottom: 1px solid grey;
+}
+.username img {
+  height: 45px;
+  border-radius: 100%;
+}
+.username span {
+  vertical-align: top;
+  padding-left: 8px;
+  font-size: 15px;
+}
+.username i {
+  float: right;
+  padding-top: 5px;
+  
+}
+.image {
+  width: 90%;
+}
+#heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  opacity: 0;
+  font-size: 0px;
+}
+.options {
+  padding: 10px;
+  justify-content: space-between;
+  
+}
+.options i {
+  padding: 5px;
+  cursor: pointer;
+  justify-content: space-between;
+}
