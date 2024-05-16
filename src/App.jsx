@@ -1,15 +1,32 @@
-
-
 import React, { useState } from "react";
 import "./styles.css";
 import brother from "./assets/brother.png";
-import sister from "./assets/sister.png";
 
 function PostCard(props) {
   const [showHeartInfo, setShowHeartInfo] = useState(false);
-  const [showCommentInfo, setShowCommentInfo] = useState(false);
-  const [showShareInfo, setShowShareInfo] = useState(false);
-  const [showSaveInfo, setShowSaveInfo] = useState(false);
+  const [showCommentInput, setShowCommentInput] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [comments, setComments] = useState([]);
+  const [heartIcon, setHeartIcon] = useState("❤️");
+
+  const toggleHeartIcon = () => {
+    setHeartIcon((prevIcon) => (prevIcon === "❤️" ? "💔" : "❤️"));
+    setShowHeartInfo(!showHeartInfo);
+  };
+
+  const handleCommentSubmit = () => {
+    if (commentText.trim() !== "") {
+      const newComment = { text: commentText, id: Date.now() };
+      setComments([...comments, newComment]);
+      setCommentText("");
+      setShowCommentInput(false);
+    }
+  };
+
+  const handleDeleteComment = (id) => {
+    const updatedComments = comments.filter((comment) => comment.id !== id);
+    setComments(updatedComments);
+  };
 
   return (
     <li className="container">
@@ -20,42 +37,40 @@ function PostCard(props) {
       </div>
       <div className="image">
         <img src={props.image} alt={props.name} />
-        <div id="heart">❤️</div>
+        <div id="heart" onClick={toggleHeartIcon}>{heartIcon}</div>
       </div>
       <div className="options">
-        <i className="heart-icon" onClick={() => setShowHeartInfo(!showHeartInfo)}>
-          ❤️
+        <i className="heart-icon" onClick={toggleHeartIcon}>
+          {heartIcon}
         </i>
-        <i className="comment-icon" onClick={() => setShowCommentInfo(!showCommentInfo)}>
+        <i className="comment-icon" onClick={() => setShowCommentInput(!showCommentInput)}>
           💬
-        </i>
-        <i className="share-icon" onClick={() => setShowShareInfo(!showShareInfo)}>
-          🔗
-        </i>
-        <i className="save-icon right" onClick={() => setShowSaveInfo(!showSaveInfo)}>
-          ⭐
         </i>
       </div>
       {showHeartInfo && (
         <div className="info">
-          Ju Pelqeni videon <strong>{props.userName}</strong>
+          Ju Pelqeni  <strong>{props.userName}</strong>
         </div>
       )}
-      {showCommentInfo && (
-        <div className="info">
-          ju po komentoni <strong>{props.userName}</strong>
+      {showCommentInput && (
+        <div className="comment-input">
+          <input
+            type="text"
+            placeholder="Komentoni Ketu!!!..."
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+          />
+          <button onClick={handleCommentSubmit}>Submit</button>
         </div>
       )}
-      {showShareInfo && (
-        <div className="info">
-          ju po i beni share <strong>{props.userName}</strong>
-        </div>
-      )}
-      {showSaveInfo && (
-        <div className="info">
-          Ju e ruajtet <strong>{props.userName}</strong>
-        </div>
-      )}
+      <div className="comments">
+        {comments.map((comment) => (
+          <div key={comment.id} className="comment">
+            <p>{comment.text}</p>
+            <button onClick={() => handleDeleteComment(comment.id)}>x</button>
+          </div>
+        ))}
+      </div>
     </li>
   );
 }
@@ -67,16 +82,10 @@ function App() {
         <ul>
           <PostCard
             image={brother}
-            name="foo"
+            name="John"
             hobbies="Loves to travel"
-            userName="JohnDoe"
-          />
-          <PostCard
-            image={sister}
-            name="foo"
-            hobbies="Enjoys hiking"
-            userName="JaneDoe"
-          />
+            userName="John"
+         />
         </ul>
       </section>
     </main>
